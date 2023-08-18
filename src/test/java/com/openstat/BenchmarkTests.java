@@ -32,13 +32,14 @@ public class BenchmarkTests {
                 Thread.sleep(SLEEP_INTERVAL);
                 System.runFinalization();
                 Thread.sleep(SLEEP_INTERVAL);
-            } catch (InterruptedException ex){
+            } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
         }
     }
 
-    @Test public void benchmarkFromFileTest() throws IOException {
+    @Test
+    public void benchmarkFromFileTest() throws IOException {
         gc();
         long m1 = Runtime.getRuntime().freeMemory();
         IPv4RadixIntTree tr[] = new IPv4RadixIntTree[M];
@@ -56,7 +57,8 @@ public class BenchmarkTests {
 
     int N = 1000000;
 
-    @Test public void benchmarkRandomTest() throws IOException {
+    @Test
+    public void benchmarkRandomTest() throws IOException {
         Random rnd = new Random(42);
 
         gc();
@@ -66,7 +68,7 @@ public class BenchmarkTests {
 
         for (int i = 0; i < N; i++) {
             int cidr = rnd.nextInt(33);
-            long netmask =  ((1L << (32 - cidr)) - 1L) ^ 0xffffffffL;
+            long netmask = ((1L << (32 - cidr)) - 1L) ^ 0xffffffffL;
             tr.put(rnd.nextLong() & 0xffffffff, netmask, rnd.nextInt());
         }
 
